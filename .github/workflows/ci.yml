@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-test:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install SwiftLint
+        run: |
+          brew update
+          brew install swiftlint
+
+      - name: SwiftLint
+        run: swiftlint --strict
+
+      - name: Swift tests
+        run: swift test

@@ -9,6 +9,7 @@ let package = Package(
     ],
     products: [
         .library(name: "LoopwishCore", targets: ["LoopwishCore"]),
+        .library(name: "LoopwishResources", targets: ["LoopwishResources"]),
         .executable(name: "LoopwishApp", targets: ["LoopwishApp"])
     ],
     targets: [
@@ -16,14 +17,36 @@ let package = Package(
             name: "LoopwishCore",
             path: "Loopwish/Core"
         ),
+        .target(
+            name: "LoopwishResources",
+            path: ".",
+            exclude: [
+                ".loopwish",
+                "CODE_OF_CONDUCT.md",
+                "CONTRIBUTING.md",
+                "LICENSE",
+                "README.md",
+                "scripts",
+                "Loopwish/App",
+                "Loopwish/Core",
+                "Loopwish/Tests"
+            ],
+            sources: [
+                "Loopwish/Resources"
+            ],
+            resources: [
+                .process("vendor/shared/design-tokens/tokens.json"),
+                .process("vendor/shared/assets/logos")
+            ]
+        ),
         .executableTarget(
             name: "LoopwishApp",
-            dependencies: ["LoopwishCore"],
+            dependencies: ["LoopwishCore", "LoopwishResources"],
             path: "Loopwish/App"
         ),
         .testTarget(
             name: "LoopwishTests",
-            dependencies: ["LoopwishCore"],
+            dependencies: ["LoopwishCore", "LoopwishResources"],
             path: "Loopwish/Tests"
         )
     ]

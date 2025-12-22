@@ -1,3 +1,12 @@
-import LoopwishCore
+import SwiftUI
+import LoopwishResources
 
-print("Loopwish — \(LoopwishCore.tagline())")
+struct LoopwishAppMain: App {
+	var body: some Scene {
+		WindowGroup {
+			ContentView()
+		}
+	}
+}
+
+LoopwishAppMain.main()

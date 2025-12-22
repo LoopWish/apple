@@ -20,12 +20,15 @@ struct ContentView: View {
                     .font(.system(size: 17))
                     .foregroundStyle(Color(hex: LoopwishDesign.hex(.textSecondary, theme: theme)))
 
-                Button(action: {}) {
-                    Text("Kom i gang")
-                        .font(.system(size: 17, weight: .semibold))
-                        .padding(.horizontal, 18)
-                        .padding(.vertical, 10)
-                }
+                Button(
+                    action: {},
+                    label: {
+                        Text("Kom i gang")
+                            .font(.system(size: 17, weight: .semibold))
+                            .padding(.horizontal, 18)
+                            .padding(.vertical, 10)
+                    }
+                )
                 .background(Color(hex: LoopwishDesign.hex(.actionPrimaryBackground, theme: theme)))
                 .foregroundStyle(Color(hex: LoopwishDesign.hex(.actionPrimaryForeground, theme: theme)))
                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
@@ -57,17 +60,17 @@ private extension Color {
         let cleaned = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         let value = UInt64(cleaned, radix: 16) ?? 0
 
-        let r, g, b: Double
+        let red, green, blue: Double
         if cleaned.count == 6 {
-            r = Double((value >> 16) & 0xFF) / 255.0
-            g = Double((value >> 8) & 0xFF) / 255.0
-            b = Double(value & 0xFF) / 255.0
+            red = Double((value >> 16) & 0xFF) / 255.0
+            green = Double((value >> 8) & 0xFF) / 255.0
+            blue = Double(value & 0xFF) / 255.0
         } else {
-            r = 0
-            g = 0
-            b = 0
+            red = 0
+            green = 0
+            blue = 0
         }
 
-        self.init(.sRGB, red: r, green: g, blue: b, opacity: 1)
+        self.init(.sRGB, red: red, green: green, blue: blue, opacity: 1)
     }
 }

@@ -101,35 +101,25 @@ private enum TokenResolver {
 }
 
 private enum Defaults {
+    private static let hexByRole: [LoopwishColorRole: String] = [
+        .textPrimary: "#2C3E50",
+        .textSecondary: "#7F8C8D",
+        .textOnAccent: "#FFFFFF",
+        .surfaceCanvas: "#FFFFFF",
+        .surfaceElevated: "#FFFFFF",
+        .surfaceAccent: "#5DADE2",
+        .borderDefault: "#7F8C8D",
+        .borderFocus: "#AF7AC5",
+        .actionPrimaryBackground: "#5DADE2",
+        .actionPrimaryForeground: "#FFFFFF",
+        .actionSecondaryForeground: "#AF7AC5",
+        .stateHover: "#AF7AC5",
+        .statePressed: "#5DADE2",
+        .stateDisabled: "#7F8C8D"
+    ]
+
     static func hex(role: LoopwishColorRole) -> String {
-        switch role {
-        case .textPrimary:
-            return "#2C3E50"
-        case .textSecondary:
-            return "#7F8C8D"
-        case .textOnAccent:
-            return "#FFFFFF"
-        case .surfaceCanvas, .surfaceElevated:
-            return "#FFFFFF"
-        case .surfaceAccent:
-            return "#5DADE2"
-        case .borderDefault:
-            return "#7F8C8D"
-        case .borderFocus:
-            return "#AF7AC5"
-        case .actionPrimaryBackground:
-            return "#5DADE2"
-        case .actionPrimaryForeground:
-            return "#FFFFFF"
-        case .actionSecondaryForeground:
-            return "#AF7AC5"
-        case .stateHover:
-            return "#AF7AC5"
-        case .statePressed:
-            return "#5DADE2"
-        case .stateDisabled:
-            return "#7F8C8D"
-        }
+        hexByRole[role] ?? "#000000"
     }
 }
 
@@ -143,7 +133,11 @@ private final class TokensCache {
     }
 
     private static func loadTokens() -> TokensFile? {
-        guard let url = Bundle.module.url(forResource: "tokens", withExtension: "json", subdirectory: "vendor/shared/design-tokens") else {
+        guard let url = Bundle.module.url(
+            forResource: "tokens",
+            withExtension: "json",
+            subdirectory: "vendor/shared/design-tokens"
+        ) else {
             return nil
         }
 
